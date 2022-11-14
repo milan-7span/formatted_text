@@ -8,6 +8,7 @@ mixin FormattedTextUtils {
     BuildContext context,
     String data, {
     TextStyle? style,
+    bool isViewMode = false,
     bool showFormattingCharacters = false,
     List<FormattedTextFormatter>? formatters,
   }) {
@@ -23,14 +24,17 @@ mixin FormattedTextUtils {
       onMatch: (Match match) {
         final matchStr = match[0] ?? '';
 
-        TextStyle myStyle = const TextStyle();
+        TextStyle myStyle = !isViewMode
+            ? const TextStyle()
+            : const TextStyle(
+                color: Colors.transparent, backgroundColor: Colors.grey);
         int prefixLength = 0;
 
         for (final entry in (formatters ??
             FormattedTextDefaults.formattedTextDefaultFormatters)) {
           final pattern = entry.pattern;
           if (RegExp(pattern).hasMatch(matchStr)) {
-            myStyle = myStyle.merge(entry.style);
+            myStyle = isViewMode ? myStyle : myStyle.merge(entry.style);
             prefixLength += entry.patternChars.length;
           }
         }

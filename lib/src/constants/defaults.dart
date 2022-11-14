@@ -1,29 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'dart:ui';
 
-import '../models/text_formatter.dart';
-import '../models/toolbar_action.dart';
+import 'package:flutter/material.dart';
+
+import '../../formatted_text.dart';
 
 mixin FormattedTextDefaults {
-  static const List<FormattedTextFormatter> formattedTextDefaultFormatters = [
-    FormattedTextFormatter(
-      patternChars: '*',
-      style: TextStyle(fontWeight: FontWeight.bold),
-    ),
-    FormattedTextFormatter(
-      patternChars: '_',
-      style: TextStyle(fontStyle: FontStyle.italic),
-    ),
-    FormattedTextFormatter(
-      patternChars: '~',
-      style: TextStyle(decoration: TextDecoration.lineThrough),
-    ),
-    FormattedTextFormatter(
-      patternChars: '#',
-      style: TextStyle(decoration: TextDecoration.underline),
-    ),
-  ];
-
   static const List<FormattedTextToolbarAction>
       formattedTextToolbarDefaultActions = [
     FormattedTextToolbarAction(
@@ -39,8 +20,39 @@ mixin FormattedTextDefaults {
       label: 'Strikethrough',
     ),
     FormattedTextToolbarAction(
-      patternChars: '#',
-      label: 'Underline',
+      patternChars: '|',
+      label: 'Spoiler',
+    ),
+  ];
+
+  static List<FormattedTextFormatter> formattedTextDefaultFormatters = [
+    const FormattedTextFormatter(
+      patternChars: '*',
+      style: TextStyle(fontWeight: FontWeight.bold),
+    ),
+    const FormattedTextFormatter(
+      patternChars: '_',
+      style: TextStyle(fontStyle: FontStyle.italic),
+    ),
+    const FormattedTextFormatter(
+      patternChars: '~',
+      style: TextStyle(decoration: TextDecoration.lineThrough),
+    ),
+    FormattedTextFormatter(
+      patternChars: '|',
+      style: TextStyle(
+        backgroundColor: Colors.grey.withOpacity(0.4),
+        // background: Paint()
+        //   ..color = Colors.grey.withOpacity(0.5)
+        //   ..strokeWidth = 10
+        //   ..strokeJoin = StrokeJoin.round
+        //   ..style = PaintingStyle.stroke
+        // background: Paint()
+        //   ..style = PaintingStyle.fill
+        //   ..strokeWidth = 10.0
+        //   ..style = PaintingStyle.stroke
+        //   ..strokeJoin = StrokeJoin.round
+      ),
     ),
   ];
 }

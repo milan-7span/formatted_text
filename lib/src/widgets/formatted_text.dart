@@ -6,23 +6,23 @@ import '../models/text_formatter.dart';
 import '../utils/utils.dart';
 
 class FormattedText extends StatelessWidget {
-  const FormattedText(
-    this.data, {
-    Key? key,
-    this.formatters,
-    this.style,
-    this.strutStyle,
-    this.textAlign,
-    this.textDirection,
-    this.locale,
-    this.softWrap,
-    this.overflow,
-    this.textScaleFactor,
-    this.maxLines,
-    this.semanticsLabel,
-    this.textWidthBasis,
-    this.textHeightBehavior,
-  }) : super(key: key);
+  const FormattedText(this.data,
+      {Key? key,
+      this.formatters,
+      this.style,
+      this.strutStyle,
+      this.textAlign,
+      this.textDirection,
+      this.locale,
+      this.softWrap,
+      this.overflow,
+      this.textScaleFactor,
+      this.maxLines,
+      this.semanticsLabel,
+      this.textWidthBasis,
+      this.textHeightBehavior,
+      this.isViewMode = false})
+      : super(key: key);
 
   /// The text to display.
   ///
@@ -121,42 +121,19 @@ class FormattedText extends StatelessWidget {
   /// {@macro flutter.painting.textPainter.textWidthBasis}
   final TextWidthBasis? textWidthBasis;
 
+  final bool isViewMode;
+
   @override
   Widget build(BuildContext context) {
     final List<InlineSpan> children = FormattedTextUtils.formattedSpans(
-      context,
-      data,
-      style: style,
-      formatters: formatters,
-    );
+        context, data,
+        style: style, formatters: formatters, isViewMode: isViewMode);
 
     return Text.rich(
       TextSpan(
         style: style,
         children: children,
       ),
-      key: key,
-      style: style,
-      strutStyle: strutStyle,
-      textAlign: textAlign,
-      textDirection: textDirection,
-      locale: locale,
-      softWrap: softWrap,
-      overflow: overflow,
-      textScaleFactor: textScaleFactor,
-      maxLines: maxLines,
-      semanticsLabel: semanticsLabel,
-      textWidthBasis: textWidthBasis,
-      textHeightBehavior: textHeightBehavior,
-    );
-  }
-}
-
-extension FormatTextX on Text {
-  Widget formatted() {
-    assert(data != null, 'data cannot be null');
-    return FormattedText(
-      data!,
       key: key,
       style: style,
       strutStyle: strutStyle,
