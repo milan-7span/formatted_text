@@ -125,7 +125,7 @@ class FormattedText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<InlineSpan> children = FormattedTextUtils.formattedSpans(
+    final List<WidgetSpan> children = FormattedTextUtils.formattedSpans(
         context, data,
         style: style, formatters: formatters, isViewMode: isViewMode);
 

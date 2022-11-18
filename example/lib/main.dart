@@ -1,6 +1,3 @@
-import 'dart:math' as math;
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:formatted_text/formatted_text.dart';
 
@@ -52,31 +49,31 @@ class _HomePageState extends State<HomePage>
       ),
       body: Column(
         children: <Widget>[
-          Expanded(
-            child: Center(
-              child: FormattedText(
-                _value,
-                isViewMode: true,
-              ),
-            ),
-          ),
-          Expanded(
-            child: TweenAnimationBuilder(
-              duration: const Duration(seconds: 10),
-              tween: Tween<double>(begin: 0, end: 100),
-              builder: (BuildContext context, double value, Widget? child) {
-                return Transform.rotate(
-                  angle: value,
-                  origin: Offset(2, 20),
-                  child: CustomPaint(
-                    foregroundPainter: RoundedRectanglePainter(value),
-                    child: Container(),
-                  ),
-                );
-              },
-              child: const Text('m'),
-            ),
-          ),
+          // Expanded(
+          //   child: Center(
+          //     child: FormattedText(
+          //       _value,
+          //       isViewMode: true,
+          //     ),
+          //   ),
+          // ),
+          // Expanded(
+          //   child: TweenAnimationBuilder(
+          //     duration: const Duration(seconds: 10),
+          //     tween: Tween<double>(begin: 0, end: 100),
+          //     builder: (BuildContext context, double value, Widget? child) {
+          //       return Transform.rotate(
+          //         angle: value,
+          //         origin: Offset(2, 20),
+          //         child: CustomPaint(
+          //           foregroundPainter: RoundedRectanglePainter(value),
+          //           child: Container(),
+          //         ),
+          //       );
+          //     },
+          //     child: const Text('m'),
+          //   ),
+          // ),
           Expanded(
             child: Center(
               child: SizedBox(
@@ -107,30 +104,5 @@ class _HomePageState extends State<HomePage>
         ],
       ),
     );
-  }
-}
-
-class RoundedRectanglePainter extends CustomPainter {
-  final double value;
-
-  RoundedRectanglePainter(this.value);
-  @override
-  void paint(Canvas canvas, Size size) {
-    final rect = Rect.fromLTRB(120, 150, 250, 200);
-    const startAngle = math.pi;
-    const sweepAngle = math.pi;
-    const useCenter = false;
-    final paint = Paint()
-      ..color = Colors.blue
-      ..style = PaintingStyle.stroke
-      ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 20)
-      ..strokeCap = StrokeCap.round
-      ..strokeWidth = 6;
-    canvas.drawArc(rect, startAngle, sweepAngle, useCenter, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
   }
 }
